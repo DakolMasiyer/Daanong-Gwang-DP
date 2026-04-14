@@ -238,9 +238,9 @@
   padding-top: 80px;
 }
 
-/* Hero needs no padding — sits full screen */
+/* Hero sits below fixed header */
 .site-main--hero {
-  padding-top: 0;
+  padding-top: 80px;
 }
 
 
@@ -306,12 +306,14 @@
 
 
 /* ============================================================
-   VIMEO FACADE
+   VIDEO FACADE — universal for Vimeo and YouTube
    Replaces iframes with a click-to-load placeholder.
-   Shows a play button; swapped for the real iframe on click.
+   Shows a poster image + play button; swapped for the
+   real iframe on click. Use .vimeo-facade or .youtube-facade.
    ============================================================ */
 
-.vimeo-facade {
+.vimeo-facade,
+.youtube-facade {
   position: relative;
   display: block;
   width: 100%;
@@ -323,7 +325,21 @@
   overflow: hidden;
 }
 
-.vimeo-facade__play {
+/* Poster image fills the facade */
+.vimeo-facade img,
+.youtube-facade img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Centred play button — sits above poster */
+.vimeo-facade__play,
+.youtube-facade__play {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -339,15 +355,19 @@
   transition: background var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
   pointer-events: none;
+  z-index: 1;
 }
 
 .vimeo-facade:hover .vimeo-facade__play,
-.vimeo-facade:focus-visible .vimeo-facade__play {
+.vimeo-facade:focus-visible .vimeo-facade__play,
+.youtube-facade:hover .youtube-facade__play,
+.youtube-facade:focus-visible .youtube-facade__play {
   background: rgba(255, 255, 255, 0.22);
   transform: translate(-50%, -50%) scale(1.08);
 }
 
-.vimeo-facade:focus-visible {
+.vimeo-facade:focus-visible,
+.youtube-facade:focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: 4px;
 }
