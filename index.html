@@ -30,7 +30,7 @@
       height: 100vh;
       min-height: 500px;
       overflow: hidden;
-      background: #000;
+      background: var(--color-bg);
     }
 
     .hero__video-wrap {
@@ -89,7 +89,7 @@
     .hero__scroll-line {
       width: 1px;
       height: 48px;
-      background: rgba(255,255,255,0.30);
+      background: var(--color-border);
       position: relative;
       overflow: hidden;
     }
@@ -116,7 +116,7 @@
       font-weight: var(--font-weight-medium);
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
-      color: rgba(255,255,255,0.40);
+      color: var(--color-text-muted);
     }
 
     /* Mobile: hide scroll cue on small screens */
@@ -169,9 +169,9 @@
       border-color: var(--color-text);
     }
 
-    /* Card stack on homepage — full bleed (no container) */
+    /* Card stack on homepage — full bleed, edge to edge */
     .work-preview .card-stack {
-      padding-inline: var(--container-pad);
+      padding-inline: 0;
     }
 
 

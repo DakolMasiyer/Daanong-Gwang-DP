@@ -3,6 +3,8 @@
    Da'anong Gyang — Cinematographer Portfolio
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap');
+
 
 /* ============================================================
    1. COLOUR SYSTEM
@@ -107,7 +109,7 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Oswald', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-base);
@@ -371,7 +373,9 @@ img, video {
   background: var(--color-card-overlay);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: var(--space-8);
 
   /* Desktop: hidden by default, revealed on hover */
@@ -394,13 +398,13 @@ img, video {
   }
 }
 
-/* Card text */
+/* Card text — always white over the dark overlay regardless of theme */
 .card__category {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.60);
   margin-bottom: var(--space-2);
 }
 
@@ -408,7 +412,7 @@ img, video {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-tight);
-  color: var(--color-text);
+  color: #ffffff;
   line-height: var(--line-height-tight);
 }
 
@@ -416,7 +420,7 @@ img, video {
 .card-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--card-gap);
+  gap: 2px;
 }
 
 /* Individual card in stack — fixed aspect ratio */
