@@ -1,0 +1,314 @@
+/* ============================================================
+   project.css — Shared individual project page styles
+   Da'anong Gyang — Cinematographer Portfolio
+   Requires DESIGN_SYSTEM.css + site.css
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   PROJECT VIDEO
+---------------------------------------------------------- */
+.project-video {
+  padding-top: 80px;
+  background: #000;
+}
+
+.video-embed {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* ----------------------------------------------------------
+   PROJECT TITLE
+---------------------------------------------------------- */
+.project-title-section {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-title-section .container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.project-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.project-title__category {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.project-meta {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+
+.project-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.project-meta__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.project-meta__value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+
+/* ----------------------------------------------------------
+   TABS SECTION
+---------------------------------------------------------- */
+.project-tabs-section {
+  padding-top: var(--space-10);
+  padding-bottom: var(--section-gap);
+}
+
+
+/* ----------------------------------------------------------
+   STILLS GRID
+---------------------------------------------------------- */
+.stills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.stills-grid__item:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 7;
+}
+
+.stills-grid__item {
+  overflow: hidden;
+  background: var(--color-bg-raised);
+  aspect-ratio: 16 / 9;
+}
+
+.stills-grid__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.stills-grid__item:hover .stills-grid__img {
+  transform: scale(1.03);
+}
+
+
+/* ----------------------------------------------------------
+   CREDITS LIST
+---------------------------------------------------------- */
+.credits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+}
+
+.credits-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-8);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.credits-list__item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.credits-list__role {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.credits-list__name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  text-align: right;
+}
+
+
+/* ----------------------------------------------------------
+   DETAILS
+---------------------------------------------------------- */
+.project-details {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.project-details p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+.project-details__specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4) var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.project-details__spec {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.project-details__spec-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.project-details__spec-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+
+/* ----------------------------------------------------------
+   NEXT PROJECT
+---------------------------------------------------------- */
+.next-project {
+  border-top: 1px solid var(--color-border);
+}
+
+.next-project__link {
+  display: block;
+  padding-block: var(--space-10);
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.next-project__link:hover {
+  opacity: 0.7;
+}
+
+.next-project__link:focus-visible {
+  outline: 1px solid var(--color-text);
+  outline-offset: 4px;
+}
+
+.next-project__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.next-project__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.next-project__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.next-project__arrow {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.next-project__link:hover .next-project__arrow {
+  transform: translateX(6px);
+  color: var(--color-text);
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .stills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stills-grid__item,
+  .stills-grid__item:first-child {
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .credits-list__item {
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: flex-start;
+  }
+
+  .credits-list__name {
+    text-align: left;
+  }
+
+  .project-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .project-meta {
+    gap: var(--space-5);
+  }
+}
