@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Da'anong Gyang — Director of Photography. Cinematic work spanning documentary, features, and commercial." />
+  <title>Da'anong Gyang — DP</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Design system + site styles -->
+  <link rel="stylesheet" href="DESIGN_SYSTEM.css" />
+  <link rel="stylesheet" href="site.css" />
+
+  <style>
+    /* ============================================================
+       index.css — Homepage specific styles
+       ============================================================ */
+
+
+    /* ----------------------------------------------------------
+       HERO
+    ---------------------------------------------------------- */
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 500px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero__video-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero__video-wrap iframe {
+      position: absolute;
+      /* Oversized to cover viewport at all ratios */
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 */
+      min-height: 100vh;
+      min-width: 177.78vh; /* 16:9 */
+      transform: translate(-50%, -50%);
+      border: none;
+      pointer-events: none; /* hero video is display only */
+    }
+
+    /* Dark scrim — subtle, keeps header legible */
+    .hero__scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(11,11,11,0.30) 0%,
+        rgba(11,11,11,0.10) 50%,
+        rgba(11,11,11,0.55) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Scroll cue */
+    .hero__scroll-cue {
+      position: absolute;
+      bottom: var(--space-8);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      opacity: 0;
+      animation: cueFadeIn 1s var(--ease-out) 1.8s both;
+    }
+
+    @keyframes cueFadeIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.30);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-text);
+      animation: scrollLine 1.6s var(--ease-in-out) 2s infinite;
+    }
+
+    @keyframes scrollLine {
+      0%   { top: -100%; }
+      50%  { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    .hero__scroll-label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.40);
+    }
+
+    /* Mobile: hide scroll cue on small screens */
+    @media (max-width: 479px) {
+      .hero__scroll-cue {
+        display: none;
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       WORK PREVIEW SECTION
+    ---------------------------------------------------------- */
+
+    .work-preview {
+      padding-block: var(--section-gap);
+    }
+
+    .work-preview__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-10);
+      padding-inline: var(--container-pad);
+    }
+
+    .work-preview__label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .work-preview__cta {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 2px;
+      transition: color var(--duration-fast) var(--ease-out),
+                  border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .work-preview__cta:hover {
+      color: var(--color-text);
+      border-color: var(--color-text);
+    }
+
+    /* Card stack on homepage — full bleed (no container) */
+    .work-preview .card-stack {
+      padding-inline: var(--container-pad);
+    }
+
+
+    /* ----------------------------------------------------------
+       CTA / FOOTER BAND
+    ---------------------------------------------------------- */
+
+    .home-cta {
+      padding-block: var(--section-gap);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .home-cta__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .home-cta__text {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      line-height: var(--line-height-tight);
+      max-width: none;
+    }
+
+    .home-cta__link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .home-cta__link:hover {
+      color: var(--color-text);
+    }
+
+    .home-cta__link-arrow {
+      display: inline-block;
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    .home-cta__link:hover .home-cta__link-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 767px) {
+      .home-cta__text {
+        font-size: var(--font-size-md);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SITE HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <a href="index.html" class="site-logo" aria-label="Da'anong Gyang — Home">
+      Da'anong Gyang&nbsp;<span style="font-weight:400;opacity:0.45;">DP</span>
+    </a>
+
+    <button
+      class="nav-trigger"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-trigger__line"></span>
+      <span class="nav-trigger__line"></span>
+    </button>
+  </header>
+
+
+  <!-- ============================================================
+       NAV OVERLAY
+  ============================================================ -->
+  <nav
+    class="nav-overlay"
+    id="nav-overlay"
+    aria-label="Main navigation"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button class="nav-close" aria-label="Close menu">✕</button>
+
+    <ul class="nav-list" role="list">
+      <li><a href="index.html"  class="nav-link" aria-current="page">Home</a></li>
+      <li><a href="work.html"   class="nav-link">Work</a></li>
+      <li><a href="about.html"  class="nav-link">About</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main class="site-main site-main--hero" id="main-content">
+
+
+    <!-- HERO -------------------------------------------------- -->
+    <section class="hero" aria-label="Showreel">
+
+      <!-- Autoplay muted Vimeo embed (background video) -->
+      <div class="hero__video-wrap">
+        <!--
+          Replace VIDEO_ID with actual Vimeo showreel ID.
+          Parameters: autoplay=1, muted=1, loop=1, background=1
+          background=1 hides all Vimeo UI and enables silent loop.
+        -->
+        <iframe
+          src="https://player.vimeo.com/video/1084887944?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="Da'anong Gyang — Showreel"
+          aria-hidden="true"
+          tabindex="-1"
+        ></iframe>
+      </div>
+
+      <!-- Gradient scrim -->
+      <div class="hero__scrim" aria-hidden="true"></div>
+
+      <!-- Scroll cue -->
+      <div class="hero__scroll-cue" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-label">Scroll</span>
+      </div>
+
+    </section>
+    <!-- /HERO -->
+
+
+    <!-- WORK PREVIEW ------------------------------------------ -->
+    <section class="work-preview" aria-labelledby="work-preview-label">
+
+      <div class="work-preview__header reveal">
+        <span class="work-preview__label" id="work-preview-label">Selected Work</span>
+        <a href="work.html" class="work-preview__cta">
+          View all <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Card Stack -->
+      <div class="card-stack reveal-stagger">
+
+        <!-- Card 1 -->
+        <a href="work/silence-of-the-harmattan.html" class="card">
+          <img
+            src="https://images.unsplash.com/photo-1594389615558-fcd4a68e5b28?w=1440&h=630&fit=crop&crop=center&q=80"
+            alt="Silence of the Harmattan — vast desert landscape at golden hour"
+            class="card__image"
+            width="1440"
+            height="630"
+            loading="eager"
+          />
+          <div class="card__overlay">
+            <span class="card__category">Documentary</span>
+            <h2 class="card__title">Silence of the Harmattan</h2>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="work/between-two-rivers.html" class="card">
+          <img
+            src="https://images.unsplash.com/photo-1517854980576-a42cc418a958?w=1440&h=630&fit=crop&crop=center&q=80"
+            alt="Between Two Rivers — aerial view of winding river through forest"
+            class="card__image"
+            width="1440"
+            height="630"
+            loading="lazy"
+          />
+          <div class="card__overlay">
+            <span class="card__category">Feature Film</span>
+            <h2 class="card__title">Between Two Rivers</h2>
+          </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="work/no-fixed-address.html" class="card">
+          <img
+            src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1440&h=630&fit=crop&crop=bottom&q=80"
+            alt="No Fixed Address — urban night scene with neon reflections"
+            class="card__image"
+            width="1440"
+            height="630"
+            loading="lazy"
+          />
+          <div class="card__overlay">
+            <span class="card__category">Short Film</span>
+            <h2 class="card__title">No Fixed Address</h2>
+          </div>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="work/atlas-campaign.html" class="card">
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1440&h=630&fit=crop&crop=center&q=80"
+            alt="Atlas Campaign — deep forest light rays through tall trees"
+            class="card__image"
+            width="1440"
+            height="630"
+            loading="lazy"
+          />
+          <div class="card__overlay">
+            <span class="card__category">Commercial</span>
+            <h2 class="card__title">Atlas Campaign</h2>
+          </div>
+        </a>
+
+      </div>
+      <!-- /Card Stack -->
+
+    </section>
+    <!-- /WORK PREVIEW -->
+
+
+    <!-- HOME CTA ---------------------------------------------- -->
+    <section class="home-cta section" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="home-cta__inner reveal">
+          <p class="home-cta__text" id="cta-heading">
+            Available for feature, documentary<br>and commercial projects.
+          </p>
+          <a href="about.html#contact" class="home-cta__link">
+            Get in touch
+            <span class="home-cta__link-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- /HOME CTA -->
+
+
+  </main>
+
+
+  <!-- Shared JS -->
+  <script src="site.js"></script>
+
+</body>
+</html>

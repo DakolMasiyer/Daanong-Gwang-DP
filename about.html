@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Da'anong Gyang — Director of Photography. Biography, experience, awards, and contact." />
+  <title>About — Da'anong Gyang DP</title>
+
+  <link rel="stylesheet" href="DESIGN_SYSTEM.css" />
+  <link rel="stylesheet" href="site.css" />
+
+  <style>
+    /* ============================================================
+       about.css — About page specific styles
+       ============================================================ */
+
+
+    /* ----------------------------------------------------------
+       PORTRAIT
+    ---------------------------------------------------------- */
+
+    .portrait-section {
+      padding-top: 80px; /* clear fixed header */
+    }
+
+    .portrait-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      overflow: hidden;
+      background: var(--color-bg-raised);
+    }
+
+    .portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    @media (max-width: 767px) {
+      .portrait-wrap {
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       BIO
+    ---------------------------------------------------------- */
+
+    .bio-section {
+      padding-block: var(--section-gap);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .bio-section .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    .bio-section__label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-top: 6px; /* optical align with first line of copy */
+    }
+
+    .bio-section__copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .bio-section__copy p {
+      max-width: none;
+    }
+
+    @media (max-width: 767px) {
+      .bio-section .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       EXPERIENCE / CLIENTS
+    ---------------------------------------------------------- */
+
+    .experience-section {
+      padding-block: var(--section-gap);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .experience-section .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    .experience-section__label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-top: 6px;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4) var(--space-6);
+    }
+
+    .clients-grid__item {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-muted);
+      padding-block: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .clients-grid__item:hover {
+      color: var(--color-text);
+    }
+
+    @media (max-width: 1023px) {
+      .clients-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .experience-section .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+
+      .clients-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 479px) {
+      .clients-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       AWARDS / FESTIVALS
+    ---------------------------------------------------------- */
+
+    .awards-section {
+      padding-block: var(--section-gap);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .awards-section .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    .awards-section__label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-top: 6px;
+    }
+
+    .awards-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .awards-list__item {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      align-items: baseline;
+      gap: var(--space-6);
+      padding-block: var(--space-5);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .awards-list__item:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .awards-list__title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text);
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    .awards-list__event {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .awards-list__year {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      text-align: right;
+    }
+
+    @media (max-width: 767px) {
+      .awards-section .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+
+      .awards-list__item {
+        grid-template-columns: 1fr;
+        gap: var(--space-1);
+      }
+
+      .awards-list__year {
+        text-align: left;
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       CONTACT BLOCK
+    ---------------------------------------------------------- */
+
+    .contact-block {
+      padding-block: var(--section-gap);
+    }
+
+    .contact-block__inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+
+    .contact-block__label {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-top: 6px;
+    }
+
+    .contact-block__right {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-10);
+    }
+
+    /* Direct links */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .contact-link {
+      display: inline-block;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      text-decoration: none;
+      line-height: var(--line-height-tight);
+      transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      opacity: 0.5;
+    }
+
+    .contact-link:focus-visible {
+      outline: 1px solid var(--color-text);
+      outline-offset: 4px;
+    }
+
+    /* Socials */
+    .contact-socials {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 2px;
+      transition: color var(--duration-fast) var(--ease-out),
+                  border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .social-link:hover,
+    .social-link:focus-visible {
+      color: var(--color-text);
+      border-color: var(--color-text);
+    }
+
+    .social-link:focus-visible {
+      outline: 1px solid var(--color-text);
+      outline-offset: 4px;
+    }
+
+    /* Copyright */
+    .contact-copyright {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      max-width: none;
+      line-height: var(--line-height-base);
+    }
+
+    @media (max-width: 767px) {
+      .contact-block__inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+
+      .contact-link {
+        font-size: var(--font-size-md);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SITE HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <a href="index.html" class="site-logo" aria-label="Da'anong Gyang — Home">
+      Da'anong Gyang&nbsp;<span style="font-weight:400;opacity:0.45;">DP</span>
+    </a>
+
+    <button
+      class="nav-trigger"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-trigger__line"></span>
+      <span class="nav-trigger__line"></span>
+    </button>
+  </header>
+
+
+  <!-- ============================================================
+       NAV OVERLAY
+  ============================================================ -->
+  <nav
+    class="nav-overlay"
+    id="nav-overlay"
+    aria-label="Main navigation"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button class="nav-close" aria-label="Close menu">✕</button>
+
+    <ul class="nav-list" role="list">
+      <li><a href="index.html"  class="nav-link">Home</a></li>
+      <li><a href="work.html"   class="nav-link">Work</a></li>
+      <li><a href="about.html"  class="nav-link" aria-current="page">About</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main class="site-main" id="main-content">
+
+
+    <!-- PORTRAIT --------------------------------------------- -->
+    <section class="portrait-section" aria-label="Portrait of Da'anong Gyang">
+      <div class="portrait-wrap">
+        <!--
+          Replace with actual portrait image.
+          Recommended: high-res, cinematic, on-set or environmental.
+          Path: /assets/images/daanong-portrait.webp
+        -->
+        <img
+          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1440&h=630&fit=crop&crop=top&q=80"
+          alt="Da'anong Gyang on location, looking through the camera"
+          width="1440"
+          height="630"
+          loading="eager"
+        />
+      </div>
+    </section>
+
+
+    <!-- BIO --------------------------------------------------- -->
+    <section class="bio-section section" aria-labelledby="bio-label">
+      <div class="container">
+
+        <p class="bio-section__label reveal" id="bio-label">Biography</p>
+
+        <div class="bio-section__copy reveal-stagger">
+          <p>
+            Da'anong Gyang is a Director of Photography working across documentary, feature film, and commercial production. Based between Lagos and London, he brings a deeply observational eye to every project — drawn to natural light, landscape, and the quiet power of the unguarded moment.
+          </p>
+          <p>
+            His documentary work has screened at festivals across West Africa, Europe, and North America. In narrative film, he collaborates closely with directors to develop visual languages that serve story above spectacle. His commercial work is sought for its ability to carry the same cinematic weight into short-form content.
+          </p>
+          <p>
+            Before moving behind the camera full-time, Da'anong studied fine art in Jos and cinematography at the London Film School. He continues to shoot on film alongside digital production.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- EXPERIENCE / CLIENTS ---------------------------------- -->
+    <section class="experience-section section" aria-labelledby="clients-label">
+      <div class="container">
+
+        <p class="experience-section__label reveal" id="clients-label">Clients &amp; Collaborators</p>
+
+        <div class="clients-grid reveal-stagger">
+          <span class="clients-grid__item">BBC Africa</span>
+          <span class="clients-grid__item">Al Jazeera</span>
+          <span class="clients-grid__item">Netflix</span>
+          <span class="clients-grid__item">ARTE</span>
+          <span class="clients-grid__item">Nike</span>
+          <span class="clients-grid__item">Guinness</span>
+          <span class="clients-grid__item">MTN</span>
+          <span class="clients-grid__item">Sahel Films</span>
+          <span class="clients-grid__item">Nile Productions</span>
+          <span class="clients-grid__item">Kwa Zulu Films</span>
+          <span class="clients-grid__item">The Guardian</span>
+          <span class="clients-grid__item">Canal+ Afrique</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- AWARDS / FESTIVALS ------------------------------------ -->
+    <section class="awards-section section" aria-labelledby="awards-label">
+      <div class="container">
+
+        <p class="awards-section__label reveal" id="awards-label">Awards &amp; Festivals</p>
+
+        <ul class="awards-list reveal-stagger" role="list">
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Best Cinematography</span>
+              <span class="awards-list__event">FESPACO — Burkina Faso</span>
+            </div>
+            <span class="awards-list__year">2023</span>
+          </li>
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Official Selection</span>
+              <span class="awards-list__event">Sundance Film Festival</span>
+            </div>
+            <span class="awards-list__year">2023</span>
+          </li>
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Special Jury Award — Cinematography</span>
+              <span class="awards-list__event">Durban International Film Festival</span>
+            </div>
+            <span class="awards-list__year">2022</span>
+          </li>
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Official Selection</span>
+              <span class="awards-list__event">Hot Docs — Toronto</span>
+            </div>
+            <span class="awards-list__year">2022</span>
+          </li>
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Best Documentary Cinematography</span>
+              <span class="awards-list__event">Africa Movie Academy Awards</span>
+            </div>
+            <span class="awards-list__year">2021</span>
+          </li>
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Official Selection</span>
+              <span class="awards-list__event">IDFA — Amsterdam</span>
+            </div>
+            <span class="awards-list__year">2020</span>
+          </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT BLOCK ---------------------------------------- -->
+    <section class="contact-block section" id="contact" aria-labelledby="contact-label">
+      <div class="container">
+        <div class="contact-block__inner">
+
+          <p class="contact-block__label reveal" id="contact-label">Get in touch</p>
+
+          <div class="contact-block__right reveal-stagger">
+
+            <div class="contact-links">
+              <a href="mailto:hello@daanong.com" class="contact-link">
+                hello@daanong.com
+              </a>
+            </div>
+
+            <div class="contact-socials">
+              <a
+                href="https://instagram.com/daanong"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="Instagram"
+              >Instagram</a>
+
+              <a
+                href="https://vimeo.com/daanong"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="Vimeo"
+              >Vimeo</a>
+
+              <a
+                href="https://imdb.com/name/daanong"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="IMDb"
+              >IMDb</a>
+            </div>
+
+            <p class="contact-copyright">
+              © <span id="year"></span> Da'anong Gyang. All rights reserved.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- /CONTACT BLOCK -->
+
+
+  </main>
+
+
+  <!-- Shared JS -->
+  <script src="site.js"></script>
+
+</body>
+</html>

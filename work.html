@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Da'anong Gyang — Work. A complete catalogue of cinematography across documentary, feature film, commercial, and short form." />
+  <title>Work — Da'anong Gyang DP</title>
+
+  <link rel="stylesheet" href="DESIGN_SYSTEM.css" />
+  <link rel="stylesheet" href="site.css" />
+
+  <style>
+    /* ============================================================
+       work.css — Work page specific styles
+       ============================================================ */
+
+
+    /* ----------------------------------------------------------
+       PAGE HEADER
+    ---------------------------------------------------------- */
+
+    .page-header {
+      padding-top: calc(80px + var(--space-12));
+      padding-bottom: var(--space-10);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .page-header__inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .page-header__title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      line-height: var(--line-height-tight);
+    }
+
+    .page-header__meta {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-bottom: 4px; /* align to title baseline */
+    }
+
+    @media (max-width: 479px) {
+      .page-header__title {
+        font-size: var(--font-size-lg);
+      }
+    }
+
+
+    /* ----------------------------------------------------------
+       FILTER BAR
+    ---------------------------------------------------------- */
+
+    .filter-bar {
+      padding-block: var(--space-6);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: var(--color-bg);
+      /* Slight blur if content scrolls beneath */
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: background var(--duration-base) var(--ease-out),
+                  backdrop-filter var(--duration-base) var(--ease-out);
+    }
+
+    .filter-bar.is-sticky {
+      background: var(--color-bg-overlay);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .filter-bar__inner {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-bar__inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      border-radius: 2px;
+      transition: color var(--duration-fast) var(--ease-out),
+                  background var(--duration-fast) var(--ease-out);
+      position: relative;
+    }
+
+    .filter-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: var(--space-4);
+      right: var(--space-4);
+      height: 1px;
+      background: var(--color-text);
+      transform: scaleX(0);
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    .filter-btn:hover {
+      color: var(--color-text);
+    }
+
+    .filter-btn.is-active {
+      color: var(--color-text);
+    }
+
+    .filter-btn.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .filter-btn:focus-visible {
+      outline: 1px solid var(--color-text);
+      outline-offset: 2px;
+    }
+
+
+    /* ----------------------------------------------------------
+       PROJECT STACK
+    ---------------------------------------------------------- */
+
+    .work-stack {
+      padding-block: var(--section-gap);
+    }
+
+    /* Cards that are hidden by filter */
+    .card[data-hidden="true"] {
+      display: none;
+    }
+
+    /* Count indicator */
+    .work-stack__count {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-8);
+      transition: opacity var(--duration-fast) var(--ease-out);
+    }
+
+    /* No-results state */
+    .work-stack__empty {
+      display: none;
+      padding-block: var(--space-20);
+      font-size: var(--font-size-sm);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .work-stack__empty.is-visible {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SITE HEADER
+  ============================================================ -->
+  <header class="site-header" role="banner">
+    <a href="index.html" class="site-logo" aria-label="Da'anong Gyang — Home">
+      Da'anong Gyang&nbsp;<span style="font-weight:400;opacity:0.45;">DP</span>
+    </a>
+
+    <button
+      class="nav-trigger"
+      aria-expanded="false"
+      aria-controls="nav-overlay"
+      aria-label="Open menu"
+    >
+      <span class="nav-trigger__line"></span>
+      <span class="nav-trigger__line"></span>
+    </button>
+  </header>
+
+
+  <!-- ============================================================
+       NAV OVERLAY
+  ============================================================ -->
+  <nav
+    class="nav-overlay"
+    id="nav-overlay"
+    aria-label="Main navigation"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button class="nav-close" aria-label="Close menu">✕</button>
+
+    <ul class="nav-list" role="list">
+      <li><a href="index.html"  class="nav-link">Home</a></li>
+      <li><a href="work.html"   class="nav-link" aria-current="page">Work</a></li>
+      <li><a href="about.html"  class="nav-link">About</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main class="site-main" id="main-content">
+
+
+    <!-- PAGE HEADER ------------------------------------------- -->
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header__inner reveal">
+          <h1 class="page-header__title">Work</h1>
+          <span class="page-header__meta" id="project-count" aria-live="polite">8 Projects</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FILTER BAR -------------------------------------------- -->
+    <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Filter projects by category">
+      <div class="container">
+        <div class="filter-bar__inner">
+
+          <button
+            class="filter-btn is-active"
+            data-filter="all"
+            aria-pressed="true"
+          >All</button>
+
+          <button
+            class="filter-btn"
+            data-filter="documentary"
+            aria-pressed="false"
+          >Documentary</button>
+
+          <button
+            class="filter-btn"
+            data-filter="feature"
+            aria-pressed="false"
+          >Features</button>
+
+          <button
+            class="filter-btn"
+            data-filter="commercial"
+            aria-pressed="false"
+          >Commercials</button>
+
+          <button
+            class="filter-btn"
+            data-filter="short"
+            aria-pressed="false"
+          >Short Form</button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PROJECT STACK ----------------------------------------- -->
+    <section class="work-stack" aria-labelledby="work-stack-heading">
+      <div class="container">
+
+        <p class="sr-only" id="work-stack-heading">All projects</p>
+
+        <!-- Card Stack -->
+        <div class="card-stack" id="card-stack">
+
+          <!-- 1 -->
+          <a
+            href="work/silence-of-the-harmattan.html"
+            class="card reveal"
+            data-category="documentary"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1594389615558-fcd4a68e5b28?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Silence of the Harmattan — vast dust-haze desert at golden hour"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="eager"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Documentary</span>
+              <h2 class="card__title">Silence of the Harmattan</h2>
+            </div>
+          </a>
+
+          <!-- 2 -->
+          <a
+            href="work/between-two-rivers.html"
+            class="card reveal"
+            data-category="feature"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1517854980576-a42cc418a958?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Between Two Rivers — aerial view of a river winding through dense forest"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Feature Film</span>
+              <h2 class="card__title">Between Two Rivers</h2>
+            </div>
+          </a>
+
+          <!-- 3 -->
+          <a
+            href="work/no-fixed-address.html"
+            class="card reveal"
+            data-category="short"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1440&h=630&fit=crop&crop=bottom&q=80"
+              alt="No Fixed Address — night city skyline with neon reflections on wet street"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Short Film</span>
+              <h2 class="card__title">No Fixed Address</h2>
+            </div>
+          </a>
+
+          <!-- 4 -->
+          <a
+            href="work/atlas-campaign.html"
+            class="card reveal"
+            data-category="commercial"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Atlas Campaign — light rays through a cathedral of tall forest trees"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Commercial</span>
+              <h2 class="card__title">Atlas Campaign</h2>
+            </div>
+          </a>
+
+          <!-- 5 -->
+          <a
+            href="work/last-dry-season.html"
+            class="card reveal"
+            data-category="documentary"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="The Last Dry Season — cracked earth under a blazing sun"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Documentary</span>
+              <h2 class="card__title">The Last Dry Season</h2>
+            </div>
+          </a>
+
+          <!-- 6 -->
+          <a
+            href="work/meridian.html"
+            class="card reveal"
+            data-category="feature"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Meridian — lone figure silhouetted against a dramatic orange horizon"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Feature Film</span>
+              <h2 class="card__title">Meridian</h2>
+            </div>
+          </a>
+
+          <!-- 7 -->
+          <a
+            href="work/luma-x-campaign.html"
+            class="card reveal"
+            data-category="commercial"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1605379399642-870262d3d051?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Luma X Campaign — sleek product photography with dramatic side lighting"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Commercial</span>
+              <h2 class="card__title">Luma X Campaign</h2>
+            </div>
+          </a>
+
+          <!-- 8 -->
+          <a
+            href="work/still-water.html"
+            class="card reveal"
+            data-category="short"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1440&h=630&fit=crop&crop=center&q=80"
+              alt="Still Water — mirror-flat lake reflecting a mountain at dawn"
+              class="card__image"
+              width="1440"
+              height="630"
+              loading="lazy"
+            />
+            <div class="card__overlay">
+              <span class="card__category">Short Form</span>
+              <h2 class="card__title">Still Water</h2>
+            </div>
+          </a>
+
+        </div>
+        <!-- /card-stack -->
+
+        <!-- Empty state (shown when filter returns 0 results) -->
+        <p class="work-stack__empty" id="empty-state" role="status">
+          No projects in this category yet.
+        </p>
+
+      </div>
+    </section>
+    <!-- /PROJECT STACK -->
+
+
+  </main>
+
+
+  <!-- Shared JS -->
+  <script src="site.js"></script>
+
+  <script>
+    /* ----------------------------------------------------------
+       FILTER BAR
+       Filters project cards by data-category attribute.
+    ---------------------------------------------------------- */
+    (function () {
+      'use strict';
+
+      var filterBtns  = document.querySelectorAll('.filter-btn');
+      var cards       = document.querySelectorAll('#card-stack .card');
+      var countEl     = document.getElementById('project-count');
+      var emptyEl     = document.getElementById('empty-state');
+      var filterBar   = document.getElementById('filter-bar');
+
+      /* Sticky filter bar behaviour */
+      var pageHeader = document.querySelector('.page-header');
+      if (pageHeader && filterBar) {
+        var stickyObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            filterBar.classList.toggle('is-sticky', !entry.isIntersecting);
+          });
+        }, { threshold: 0 });
+        stickyObserver.observe(pageHeader);
+      }
+
+      function applyFilter(filter) {
+        var visible = 0;
+
+        cards.forEach(function (card) {
+          var cat = card.getAttribute('data-category');
+          var show = filter === 'all' || cat === filter;
+          card.setAttribute('data-hidden', show ? 'false' : 'true');
+          if (show) visible++;
+        });
+
+        /* Update count */
+        if (countEl) {
+          countEl.textContent = visible + (visible === 1 ? ' Project' : ' Projects');
+        }
+
+        /* Empty state */
+        if (emptyEl) {
+          emptyEl.classList.toggle('is-visible', visible === 0);
+        }
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          /* Update button states */
+          filterBtns.forEach(function (b) {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-pressed', 'true');
+
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      /* Initialise count */
+      applyFilter('all');
+    }());
+  </script>
+
+</body>
+</html>
