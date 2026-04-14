@@ -29,103 +29,55 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 500px;
+      aspect-ratio: 16 / 9;
+      min-height: 260px;
       overflow: hidden;
       background: var(--color-bg);
     }
 
-    .hero__video-wrap {
+    /* Poster facade fills hero */
+    .hero__facade {
       position: absolute;
       inset: 0;
+      cursor: pointer;
+      display: block;
+    }
+    .hero__poster-img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
-    .hero__video-wrap iframe {
+    /* Play button centered over poster */
+    .hero__play-btn {
       position: absolute;
-      /* Oversized to cover viewport at all ratios */
       top: 50%;
       left: 50%;
-      width: 100vw;
-      height: 56.25vw; /* 16:9 */
-      min-height: 100vh;
-      min-width: 177.78vh; /* 16:9 */
       transform: translate(-50%, -50%);
-      border: none;
-      pointer-events: none; /* hero video is display only */
-    }
-
-    /* Dark scrim — subtle, keeps header legible */
-    .hero__scrim {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(11,11,11,0.30) 0%,
-        rgba(11,11,11,0.10) 50%,
-        rgba(11,11,11,0.55) 100%
-      );
-      pointer-events: none;
-    }
-
-    /* Scroll cue */
-    .hero__scroll-cue {
-      position: absolute;
-      bottom: var(--space-8);
-      left: 50%;
-      transform: translateX(-50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.85);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: var(--space-2);
-      opacity: 0;
-      animation: cueFadeIn 1s var(--ease-out) 1.8s both;
+      justify-content: center;
+      transition: background var(--duration-fast) var(--ease-out),
+                  transform var(--duration-fast) var(--ease-out);
+      pointer-events: none; /* parent .hero__facade handles click */
     }
-
-    @keyframes cueFadeIn {
-      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .hero__facade:hover .hero__play-btn,
+    .hero__facade:focus .hero__play-btn {
+      background: rgba(0,0,0,0.65);
+      transform: translate(-50%, -50%) scale(1.08);
     }
-
-    .hero__scroll-line {
-      width: 1px;
-      height: 48px;
-      background: var(--color-border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero__scroll-line::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-text);
-      animation: scrollLine 1.6s var(--ease-in-out) 2s infinite;
-    }
-
-    @keyframes scrollLine {
-      0%   { top: -100%; }
-      50%  { top: 0%; }
-      100% { top: 100%; }
-    }
-
-    .hero__scroll-label {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-medium);
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-    }
-
-    /* Mobile: hide scroll cue on small screens */
-    @media (max-width: 479px) {
-      .hero__scroll-cue {
-        display: none;
-      }
+    .hero__play-btn svg {
+      width: 26px;
+      height: 26px;
+      margin-left: 4px; /* optical centering for play triangle */
     }
 
 
@@ -289,30 +241,22 @@
     <!-- HERO -------------------------------------------------- -->
     <section class="hero" aria-label="Showreel">
 
-      <!-- Autoplay muted Vimeo embed (background video) -->
-      <div class="hero__video-wrap">
-        <!--
-          Replace VIDEO_ID with actual Vimeo showreel ID.
-          Parameters: autoplay=1, muted=1, loop=1, background=1
-          background=1 hides all Vimeo UI and enables silent loop.
-        -->
-        <iframe
-          data-src="https://player.vimeo.com/video/1182882079?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          title="Da'anong Gyang — Showreel"
-          aria-hidden="true"
-          tabindex="-1"
-        ></iframe>
-      </div>
-
-      <!-- Gradient scrim -->
-      <div class="hero__scrim" aria-hidden="true"></div>
-
-      <!-- Scroll cue -->
-      <div class="hero__scroll-cue" aria-hidden="true">
-        <div class="hero__scroll-line"></div>
-        <span class="hero__scroll-label">Scroll</span>
+      <!-- Poster + play facade: tap/click loads Vimeo player inline -->
+      <div class="hero__facade vimeo-facade"
+           data-src="https://player.vimeo.com/video/1182882079?autoplay=1&title=0&byline=0&portrait=0"
+           data-title="Da'anong Gyang — Showreel"
+           role="button"
+           tabindex="0"
+           aria-label="Play Da'anong Gyang showreel">
+        <img class="hero__poster-img"
+             src=""
+             alt="Da'anong Gyang showreel poster"
+             width="1920" height="1080" />
+        <div class="hero__play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
       </div>
 
     </section>

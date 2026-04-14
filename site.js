@@ -224,20 +224,18 @@
      Project pages: click-to-load facade → replaced with iframe.
   ---------------------------------------------------------- */
 
-  // Hero background video — inject after browser is idle
-  var heroIframe = document.querySelector('.hero__video-wrap iframe[data-src]');
-  if (heroIframe) {
-    function loadHeroVideo() {
-      heroIframe.src = heroIframe.getAttribute('data-src');
-    }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadHeroVideo, { timeout: 1500 });
-    } else {
-      window.addEventListener('load', function () { setTimeout(loadHeroVideo, 300); });
-    }
+  // Hero poster — fetch Vimeo thumbnail via oembed API
+  var heroPoster = document.querySelector('.hero__poster-img');
+  if (heroPoster) {
+    fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/1182882079&width=1920')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.thumbnail_url) heroPoster.src = d.thumbnail_url;
+      })
+      .catch(function () { /* poster stays blank — hero bg colour shows */ });
   }
 
-  // Project page facades — click swaps facade button for live iframe
+  // All facades (hero + project pages) — click swaps facade for live iframe
   document.querySelectorAll('.vimeo-facade[data-src]').forEach(function (facade) {
     facade.addEventListener('click', function () {
       var iframe = document.createElement('iframe');
@@ -247,6 +245,13 @@
       iframe.setAttribute('title', facade.getAttribute('data-title') || 'Project video');
       iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
       facade.parentNode.replaceChild(iframe, facade);
+    });
+    // Keyboard support for role=button facades
+    facade.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        facade.click();
+      }
     });
   });
 
