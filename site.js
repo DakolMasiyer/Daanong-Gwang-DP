@@ -219,6 +219,39 @@
 
 
   /* ----------------------------------------------------------
+     9. VIMEO LAZY LOAD
+     Hero: injects src after page is idle (avoids blocking render).
+     Project pages: click-to-load facade → replaced with iframe.
+  ---------------------------------------------------------- */
+
+  // Hero background video — inject after browser is idle
+  var heroIframe = document.querySelector('.hero__video-wrap iframe[data-src]');
+  if (heroIframe) {
+    function loadHeroVideo() {
+      heroIframe.src = heroIframe.getAttribute('data-src');
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadHeroVideo, { timeout: 1500 });
+    } else {
+      window.addEventListener('load', function () { setTimeout(loadHeroVideo, 300); });
+    }
+  }
+
+  // Project page facades — click swaps facade button for live iframe
+  document.querySelectorAll('.vimeo-facade[data-src]').forEach(function (facade) {
+    facade.addEventListener('click', function () {
+      var iframe = document.createElement('iframe');
+      iframe.src = facade.getAttribute('data-src');
+      iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', facade.getAttribute('data-title') || 'Project video');
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+      facade.parentNode.replaceChild(iframe, facade);
+    });
+  });
+
+
+  /* ----------------------------------------------------------
      8. CARD TAP REVEAL (touch devices)
      On hover-capable devices CSS handles the overlay.
      On touch (iPhone etc.): first tap shows overlay, second
