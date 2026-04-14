@@ -389,11 +389,9 @@ img, video {
   }
 }
 
-/* Mobile: overlay always visible */
-@media (hover: none) {
-  .card__overlay {
-    opacity: 1;
-  }
+/* Scroll-based reveal — overlay appears when card is in view (all devices) */
+.card.is-in-view .card__overlay {
+  opacity: 1;
 }
 
 /* Card text — always white over the dark overlay regardless of theme */

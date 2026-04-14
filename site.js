@@ -218,4 +218,30 @@
   }
 
 
+  /* ----------------------------------------------------------
+     8. CARD SCROLL REVEAL
+     Shows .card__overlay when a card is ≥ 40% in the viewport.
+     Hides it again when the card scrolls out.
+     Cinematic "image only → title appears" on scroll/touch-scroll.
+  ---------------------------------------------------------- */
+
+  var cards = document.querySelectorAll('.card');
+
+  if (cards.length && 'IntersectionObserver' in window) {
+    var cardObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in-view');
+        } else {
+          entry.target.classList.remove('is-in-view');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    cards.forEach(function (card) {
+      cardObserver.observe(card);
+    });
+  }
+
+
 })();
