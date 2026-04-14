@@ -234,13 +234,9 @@
    ============================================================ */
 
 /* Push content below fixed header */
-.site-main {
-  padding-top: 80px;
-}
-
-/* Hero sits below fixed header */
+.site-main,
 .site-main--hero {
-  padding-top: 80px;
+  padding-top: var(--header-height);
 }
 
 

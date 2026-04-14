@@ -190,6 +190,9 @@ img, video {
   --card-gap:     var(--space-10);   /* 40px between cards */
   --content-gap:  var(--space-6);    /* 24px within content blocks */
 
+  /* Header */
+  --header-height: 92px;             /* space-6 top + 44px logo + space-6 bottom */
+
   /* Container */
   --container-max: 1440px;
   --container-pad: var(--space-6);   /* 24px horizontal padding */
