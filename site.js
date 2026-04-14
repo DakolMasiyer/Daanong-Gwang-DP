@@ -224,20 +224,6 @@
      Project pages: click-to-load facade → replaced with iframe.
   ---------------------------------------------------------- */
 
-  // Hero poster — try local still first, fall back to Vimeo oembed thumbnail
-  // To use a specific frame: add assets/images/showreel-poster.jpg (e.g. a screenshot at 0:43)
-  var heroPoster = document.querySelector('.hero .vimeo-facade img');
-  if (heroPoster) {
-    heroPoster.src = 'assets/images/showreel-poster.jpg';
-    heroPoster.onerror = function () {
-      heroPoster.onerror = null;
-      fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/1182882079&width=1920')
-        .then(function (r) { return r.json(); })
-        .then(function (d) { if (d.thumbnail_url) heroPoster.src = d.thumbnail_url; })
-        .catch(function () { /* poster stays blank — hero bg colour shows */ });
-    };
-  }
-
   // All facades (Vimeo + YouTube) — click swaps facade for live iframe
   document.querySelectorAll('.vimeo-facade[data-src], .youtube-facade[data-src]').forEach(function (facade) {
     facade.addEventListener('click', function () {
