@@ -219,28 +219,35 @@
 
 
   /* ----------------------------------------------------------
-     8. CARD SCROLL REVEAL
-     Shows .card__overlay when a card is ≥ 40% in the viewport.
-     Hides it again when the card scrolls out.
-     Cinematic "image only → title appears" on scroll/touch-scroll.
+     8. CARD TAP REVEAL (touch devices)
+     On hover-capable devices CSS handles the overlay.
+     On touch (iPhone etc.): first tap shows overlay, second
+     tap follows the link. Tapping outside dismisses.
+     Runs in capture phase so it fires before the page-exit
+     transition handler in Section 2.
   ---------------------------------------------------------- */
 
-  var cards = document.querySelectorAll('.card');
+  if (window.matchMedia('(hover: none)').matches) {
+    var allCards = document.querySelectorAll('.card');
 
-  if (cards.length && 'IntersectionObserver' in window) {
-    var cardObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in-view');
-        } else {
-          entry.target.classList.remove('is-in-view');
-        }
-      });
-    }, { threshold: 0.4 });
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest('.card');
 
-    cards.forEach(function (card) {
-      cardObserver.observe(card);
-    });
+      if (!card) {
+        // Tapped outside a card — dismiss any open overlay
+        allCards.forEach(function (c) { c.classList.remove('is-in-view'); });
+        return;
+      }
+
+      if (!card.classList.contains('is-in-view')) {
+        // First tap — show overlay, block navigation and page-exit fade
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        allCards.forEach(function (c) { c.classList.remove('is-in-view'); });
+        card.classList.add('is-in-view');
+      }
+      // Second tap — is-in-view already set, let Section 2 navigate normally
+    }, true); // capture phase
   }
 
 
