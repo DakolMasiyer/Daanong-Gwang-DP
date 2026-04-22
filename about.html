@@ -91,6 +91,45 @@
 
 
     /* ----------------------------------------------------------
+       BTS GRID
+    ---------------------------------------------------------- */
+
+    .bts-section {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .bts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .bts-grid__item {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--color-bg-raised);
+    }
+
+    .bts-grid__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform var(--duration-slow) var(--ease-out);
+    }
+
+    .bts-grid__item:hover .bts-grid__img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 767px) {
+      .bts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ----------------------------------------------------------
        EXPERIENCE / CLIENTS
     ---------------------------------------------------------- */
 
@@ -444,6 +483,25 @@
     </section>
 
 
+    <!-- BTS PHOTOS ------------------------------------------- -->
+    <section class="bts-section" aria-label="Behind the scenes">
+      <div class="bts-grid">
+        <div class="bts-grid__item">
+          <img src="assets/images/bts/bts-01.webp" alt="Da'anong Gyang on set" class="bts-grid__img" width="720" height="540" loading="lazy" />
+        </div>
+        <div class="bts-grid__item">
+          <img src="assets/images/bts/bts-02.webp" alt="Da'anong Gyang on set" class="bts-grid__img" width="720" height="540" loading="lazy" />
+        </div>
+        <div class="bts-grid__item">
+          <img src="assets/images/bts/bts-03.webp" alt="Da'anong Gyang on set" class="bts-grid__img" width="720" height="540" loading="lazy" />
+        </div>
+        <div class="bts-grid__item">
+          <img src="assets/images/bts/bts-04.webp" alt="Da'anong Gyang on set" class="bts-grid__img" width="720" height="540" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+
     <!-- EXPERIENCE / CLIENTS ---------------------------------- -->
     <section class="experience-section section" aria-labelledby="clients-label">
       <div class="container">
@@ -459,6 +517,8 @@
           <span class="clients-grid__item">Laju Iren Films</span>
           <span class="clients-grid__item">Unfriendly Space Studios</span>
           <span class="clients-grid__item">Nemsia Studios</span>
+          <span class="clients-grid__item">Natives Filmworks</span>
+          <span class="clients-grid__item">First Features Project</span>
         </div>
 
       </div>
@@ -472,6 +532,14 @@
         <p class="awards-section__label reveal" id="awards-label">Awards &amp; Festivals</p>
 
         <ul class="awards-list reveal-stagger" role="list">
+
+          <li class="awards-list__item">
+            <div>
+              <span class="awards-list__title">Nominated, Best Cinematography — <em>Finding Nina</em></span>
+              <span class="awards-list__event">Africa Magic Viewers' Choice Awards (AMVCA)</span>
+            </div>
+            <span class="awards-list__year">2026</span>
+          </li>
 
           <li class="awards-list__item">
             <div>
