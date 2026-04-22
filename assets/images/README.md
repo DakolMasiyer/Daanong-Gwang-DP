@@ -1,58 +1,60 @@
 # /assets/images/
 
-Place all site images here as .webp files.
-JPEG fallbacks optional but not required for modern browsers.
+Place all site images here. JPEG or WebP both supported — HTML references are `.jpg`; if you save as `.webp`, also update the `src=` in the affected HTML files.
 
 ---
 
-## NAMING CONVENTION
+## REQUIRED FILES (current site)
 
-  project-slug--still-01.webp
-  project-slug--still-02.webp
-  project-slug--card.webp       ← card thumbnail (1440×630)
-  daanong-portrait.webp         ← about page portrait
+### About page
+  daanong-portrait.jpg            1920 × 840 or 1440 × 630  (16:7 crop, top-biased)
 
-## REQUIRED FILES
+### Card thumbnails  (1440 × 630 — 16:7)
+  finding-nina-card.jpg
+  onobiren-card.jpg
+  mtv-shuga-psa-card.jpg
 
-### Site-wide
-  daanong-portrait.webp         1440 × 630  (about page, full-bleed)
-  og-image.webp                 1200 × 630  (Open Graph / social share)
-  favicon.png                   512 × 512   (square, will be cropped to circle by browsers)
+### Project stills
+Each project expects 6 stills; the first (`-still-01`) is full-width 16:7, the rest are grid tiles 16:9.
 
-### Project card thumbnails  (1440 × 630 — 16:7)
-  silence-of-the-harmattan--card.webp
-  between-two-rivers--card.webp
-  no-fixed-address--card.webp
-  atlas-campaign--card.webp
-  last-dry-season--card.webp
-  meridian--card.webp
-  luma-x-campaign--card.webp
-  still-water--card.webp
+  finding-nina-still-01.jpg       1440 × 630
+  finding-nina-still-02.jpg       720 × 405
+  finding-nina-still-03.jpg       720 × 405
+  finding-nina-still-04.jpg       720 × 405
+  finding-nina-still-05.jpg       720 × 405
+  finding-nina-still-06.jpg       720 × 405
 
-### Project stills  (1440 × 630 for hero still, 720 × 405 for grid)
-  silence-of-the-harmattan--still-01.webp  (1440 × 630)
-  silence-of-the-harmattan--still-02.webp  (720 × 405)
-  silence-of-the-harmattan--still-03.webp  (720 × 405)
-  silence-of-the-harmattan--still-04.webp  (720 × 405)
-  silence-of-the-harmattan--still-05.webp  (720 × 405)
-  silence-of-the-harmattan--still-06.webp  (720 × 405)
+  onobiren-still-01.jpg           1440 × 630
+  onobiren-still-02.jpg           720 × 405
+  onobiren-still-03.jpg           720 × 405
+  onobiren-still-04.jpg           720 × 405
+  onobiren-still-05.jpg           720 × 405
+  onobiren-still-06.jpg           720 × 405
 
-  [repeat pattern for all 8 projects]
+  mtv-shuga-psa-still-01.jpg      1440 × 630
+  mtv-shuga-psa-still-02.jpg      720 × 405
+  mtv-shuga-psa-still-03.jpg      720 × 405
+  mtv-shuga-psa-still-04.jpg      720 × 405
+  mtv-shuga-psa-still-05.jpg      720 × 405
+  mtv-shuga-psa-still-06.jpg      720 × 405
+
+### Awards / Honors (optional — Finding Nina)
+  awards/finding-nina-arewa-best-picture.jpg
+  awards/finding-nina-zuma-cinematography.jpg
+  awards/finding-nina-bon-cinematography.jpg
+  (any other certificates/plaques you have)
 
 ---
 
 ## EXPORT SETTINGS
 
-  Format:     WebP
-  Quality:    80–85
+  Format:     JPEG (progressive) or WebP
+  Quality:    80–85  (visually lossless, ~60–80% smaller than PNG)
   Card size:  1440 × 630 px
-  Still hero: 1440 × 630 px
-  Still grid: 720 × 405 px
-  Portrait:   1440 × 630 px (crop top-biased)
+  Still 01:   1440 × 630 px
+  Stills 02–06: 720 × 405 px
+  Portrait:   1920 × 840 px (or 1440 × 630)
 
-## PERFORMANCE NOTES
-
-- All images use loading="lazy" except hero/above-fold assets
-- Explicit width + height attributes are already set on all <img> tags
-- Do NOT exceed 300KB per card image at 1440px wide
-- Do NOT exceed 150KB per grid still at 720px wide
+Compress with **TinyPNG** (https://tinypng.com), **Squoosh** (https://squoosh.app), or `cwebp -q 82` before committing. Target sizes:
+- card / portrait: ≤ 300 KB
+- grid still: ≤ 150 KB
