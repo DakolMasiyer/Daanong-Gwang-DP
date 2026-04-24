@@ -240,12 +240,18 @@
 
   /* ----------------------------------------------------------
      8. HERO VIDEO MUTE TOGGLE
-     Starts muted (required for autoplay). Button at bottom-right
-     of hero toggles muted state and swaps icon.
+     Starts muted (required for autoplay). Explicitly set muted
+     and call play() because some browsers ignore the HTML attribute.
+     Button at bottom-right of hero toggles muted state.
   ---------------------------------------------------------- */
 
   var heroVideo   = document.querySelector('.hero__video');
   var heroMuteBtn = document.querySelector('.hero__mute-btn');
+
+  if (heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.play().catch(function () {});
+  }
 
   if (heroVideo && heroMuteBtn) {
     heroMuteBtn.addEventListener('click', function () {
