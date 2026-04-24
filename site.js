@@ -239,7 +239,36 @@
 
 
   /* ----------------------------------------------------------
-     8. CARD TAP REVEAL (touch devices)
+     8. HERO VIDEO MUTE TOGGLE
+     Starts muted (required for autoplay). Explicitly set muted
+     and call play() because some browsers ignore the HTML attribute.
+     Button at bottom-right of hero toggles muted state.
+  ---------------------------------------------------------- */
+
+  var heroVideo   = document.querySelector('.hero__video');
+  var heroMuteBtn = document.querySelector('.hero__mute-btn');
+
+  if (heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.play().catch(function () {});
+  }
+
+  if (heroVideo && heroMuteBtn) {
+    heroMuteBtn.addEventListener('click', function () {
+      heroVideo.muted = !heroVideo.muted;
+      if (heroVideo.muted) {
+        heroMuteBtn.classList.remove('is-unmuted');
+        heroMuteBtn.setAttribute('aria-label', 'Unmute video');
+      } else {
+        heroMuteBtn.classList.add('is-unmuted');
+        heroMuteBtn.setAttribute('aria-label', 'Mute video');
+      }
+    });
+  }
+
+
+  /* ----------------------------------------------------------
+     9. CARD TAP REVEAL (touch devices)
      On hover-capable devices CSS handles the overlay.
      On touch (iPhone etc.): first tap shows overlay, second
      tap follows the link. Tapping outside dismisses.
